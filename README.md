@@ -1,7 +1,8 @@
 ## vidsave
 Save YouTube videos to your local machine from the command line.
 
-* gif *
+![Image of vidsave]
+(https://imgur.com/a/6IUfL)
 
 Build upon [pytube](https://github.com/nficano/pytube).
 
