@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+
+# vidsave: Save YouTube videos to your local machine from the command line.
+# Usage: vidsave URL <path>
+# (<path> is where you'd like the video to be saved)
+# Built upon the pytube library: https://github.com/nficano/pytube
+
+from pytube import YouTube
+from sys import argv
+from os import getcwd
+
+if len(argv) != 2 and len(argv) != 3:
+    print(len(argv))
+    print(f'Usage: {argv[0]} URL <PATH>')
+    exit()
+
+url = argv[1]
+try:
+    vid = YouTube(url)
+except:
+    print('Invalid YouTube URL:', url)
+    exit()
+
+print(f'Saving "{vid.title}"', end=' ')
+if len(argv) > 2:
+    path = argv[2]
+    print(f'in {path}')
+else:
+    print(f'in {getcwd()}')
+
+stream = vid.streams.filter(file_extension='mp4').first()
+print('Download starting. Please hold...')
+if len(argv) > 2:
+    stream.download(path)
+else:
+    stream.download()
+print('Download complete!')
